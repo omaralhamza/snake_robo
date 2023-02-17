@@ -3,7 +3,7 @@
 
     <xacro:include filename="snake_robot_core.xacro"/>
 <!-- <xacro:include filename="gazebo_control.xacro"/> -->
-    <xacro:include filename="materials.xacro" />
+    <xacro:include filename="materials.xacro" /> 
 
 
 </robot>

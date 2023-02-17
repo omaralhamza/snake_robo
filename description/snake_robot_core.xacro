@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro"  >
 
     <xacro:include filename="inertial_macros.xacro"/>
-    
+    <!-- <xacro:include filename="material.xacro"/> -->
     <!-- Constants for robot dimensions -->
     <xacro:property name="PI" value="3.1415926535897931"/>
 
@@ -12,13 +12,15 @@
 
 
     <!-- * * * BASE_LINK * * * -->
-    <link name="base_link">
-        
-    </link>
+    <link name="world"></link>
 
-    <joint name="head_joint" type="fixed">
+ <!-- *********************what type of joint should we have here is it contineus -->
+ <!-- *********************what type of joint should we have here is it contineus -->
+ <!-- *********************what type of joint should we have here is it contineus -->
+
+    <joint name="head_joint" type="continuous">
         <origin xyz="0.0 0.0 0.00" />
-        <parent link="base_link"/>
+        <parent link="world"/>
         <child link="head_link"/>
         <axis xyz="0 0 1"/>
     </joint>
@@ -60,6 +62,7 @@
         <limit lower="-1.5708" upper="1.5708" velocity="50.0" effort="1000.0"/>
         <origin xyz="0.0 0.3 0.0" />
         <axis xyz="0 0 1"/>
+        <joint_properties damping="6.0" friction="6.0"/>
     </joint>
     
     <!-- LINK 1 -->
@@ -99,6 +102,7 @@
         <limit lower="-1.5708" upper="1.5708" velocity="50.0" effort="1000.0"/>
         <origin xyz="0.0 0.3 0.00" />    
         <axis xyz="0 0 1"/>
+        <joint_properties damping="6.0" friction="6.0"/>
     </joint>
     
     <!-- LINK 2 -->
@@ -138,6 +142,7 @@
         <limit lower="-1.5708" upper="1.5708" velocity="50.0" effort="1000.0"/>
         <origin xyz="0.0 0.3 0.0" rpy="0 0 0"/>
         <axis xyz="0 0 1"/>
+        <joint_properties damping="6.0" friction="6.0"/>
     </joint>
     
     <!-- LINK 3 -->
@@ -177,6 +182,7 @@
         <limit lower="-1.5708" upper="1.5708" velocity="50.0" effort="1000.0"/>
         <origin xyz="0.0 0.3 0.0" rpy="0 0 0"/>
         <axis xyz="0 0 1"/>
+        <joint_properties damping="6.0" friction="6.0"/>
     </joint>
     
     <!-- HEAD LINK -->
@@ -207,5 +213,48 @@
     <gazebo reference="head_link">
         <material>Gazebo/Blue</material>
     </gazebo>
+
+
+    <!-- camera_joint describes where the camera is relative to the arm -->
+    <!-- - Even though the camera isn't moving relative to the arm, it will probably be helpful to have its own link/frame rather than just adding more visuals to the arm -->
+    <!-- - For this example, the camera_link origin will be at the centre of the camera's "sensor" -->
+    <joint name="camera_joint" type="fixed">
+        <origin xyz="0 0.3 0" rpy="0 0 0"/>
+        <parent link="link_4"/>
+        <child link="camera_link"/>        
+    </joint>
+
+
+    <!-- camera_link describes the camera at the end of the arm -->
+    <!-- - It has multiple visual elements, which ultimately get combined together -->
+    <!-- - Even if we specify different materials, RViz will just colour them all the same as the first -->
+    <!-- - Although we could also specify multiple collision geometries, instead we just use a single box that encompasses the whole camera -->
+    <link name="camera_link">
+        <visual>
+            <origin xyz="0.00 0.03 0.05" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.1 0.06 0.1" />
+            </geometry>
+            <material name="green">
+                <color rgba="0.2 1 0.2 1"/>
+            </material>
+        </visual>
+        <visual>
+            <origin xyz="0.0 0.09 0.05" rpy="1.5708 0 0"/>
+            <geometry>
+                <cylinder length="0.06" radius="0.04" />
+            </geometry>
+            <material name="blue" />
+        </visual>
+        <collision>
+            <origin xyz="0.0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.1 0.15 0.1" />
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="0.05" x="0.12" y="0.15" z="0.15">
+            <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
+        </xacro:inertial_box>
+    </link>
 
 </robot>
