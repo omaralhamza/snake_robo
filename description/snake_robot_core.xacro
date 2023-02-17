@@ -2,7 +2,8 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro"  >
 
     <xacro:include filename="inertial_macros.xacro"/>
-    <!-- <xacro:include filename="material.xacro"/> -->
+    <xacro:include filename="materials.xacro"/> 
+    <xacro:include filename="gazebo_control.xacro"/> 
     <!-- Constants for robot dimensions -->
     <xacro:property name="PI" value="3.1415926535897931"/>
 
@@ -12,19 +13,21 @@
 
 
     <!-- * * * BASE_LINK * * * -->
-    <link name="world"></link>
+   <!-- <link name="world"></link>-->
 
- <!-- *********************what type of joint should we have here is it contineus -->
- <!-- *********************what type of joint should we have here is it contineus -->
+ <!-- *********************what type of joint should we have here is it contineus and o we need world link at all-->
+ <!-- *********************what type of joint should we have here is it contineus and o we need world link at all--> 
  <!-- *********************what type of joint should we have here is it contineus -->
 
+ <!--
     <joint name="head_joint" type="continuous">
         <origin xyz="0.0 0.0 0.00" />
         <parent link="world"/>
         <child link="head_link"/>
         <axis xyz="0 0 1"/>
     </joint>
-  
+-->
+
      <!-- TAIL LINK WHICH I HAVE CALLED FOR HEAD LINK -->
 
     <link name="head_link">
@@ -33,9 +36,7 @@
             <geometry>
                 <box size="0.1 0.3 0.1"/>
             </geometry>
-            <material name="green">
-                <color rgba="0.2 1 0.2 1"/>
-            </material>
+            <material name="green"/>
         </visual>
         <collision>
             <origin xyz="0.0 0.15 0.05" />
@@ -47,12 +48,6 @@
             <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
     </link>
-
-    <!-- GAZEBO COLOR CONFIG -->
-
-    <gazebo reference="head_link">
-        <material>Gazebo/White</material>
-    </gazebo>
 
     <!-- JOINT BETWEEN THE TAIL AND THE FIRST LINK -->
 
@@ -69,9 +64,7 @@
 
     <link name="link_1">
         <visual>
-            <material name="black">
-                <color rgba="0 0 0 1"/>
-            </material>
+            <material name="black"/>
             <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
              <geometry>
                 <box size="0.1 0.3 0.1"/>
@@ -88,11 +81,7 @@
         </xacro:inertial_box>
     </link>
 
-        <!-- GAZEBO COLOR CONFIG -->
 
-    <gazebo reference="head_link">
-        <material>Gazebo/Black</material>
-    </gazebo>
     
     <!-- JOINT BETWEEM LINK 1 AND 2 -->
 
@@ -109,9 +98,7 @@
 
     <link name="link_2">
         <visual>
-            <material name="orange">
-                <color rgba="1 0.3 0.1 1"/>
-            </material>
+            <material name="orange"/>
             <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>           
             <geometry>
                 <box size="0.1 0.3 0.1"/>
@@ -128,11 +115,7 @@
         </xacro:inertial_box>
     </link>   
        
-        <!-- GAZEBO COLOR CONFIG -->
 
-    <gazebo reference="head_link">
-        <material>Gazebo/Blue</material>
-    </gazebo>
 
     <!--JOINT BETWEEN LINK 2 AND LINK 3 -->
 
@@ -149,9 +132,7 @@
 
     <link name="link_3">
         <visual>
-            <material name="black">
-                <color rgba="0 0 0 1"/>
-            </material>
+            <material name="black"/>
             <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
             <geometry>
                 <box size="0.1 0.3 0.1"/>
@@ -168,12 +149,7 @@
         </xacro:inertial_box>
     </link>
        
-        <!-- GAZEBO COLOR CONFIG -->
 
-    <gazebo reference="head_link">
-        <material>Gazebo/White</material>
-    </gazebo>
-       
     <!-- JOINT BETWEEN LINK 3 AND LINK 4 ***NOTE THAT LINK 4 IS THE HEAD -->
 
     <joint name="link_3_4_joint" type="revolute">
@@ -189,9 +165,7 @@
 
     <link name="link_4">
         <visual>
-            <material name="orange">
-                <color rgba="1 0.3 0.1 1"/> 
-            </material>
+            <material name="orange"/>
             <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>  
             <geometry>
                 <box size="0.1 0.3 0.1"/>
@@ -207,12 +181,6 @@
             <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
     </link>
-
-    <!-- GAZEBO COLOR CONFIG -->
-
-    <gazebo reference="head_link">
-        <material>Gazebo/Blue</material>
-    </gazebo>
 
 
     <!-- camera_joint describes where the camera is relative to the arm -->
@@ -235,9 +203,7 @@
             <geometry>
                 <box size="0.1 0.06 0.1" />
             </geometry>
-            <material name="green">
-                <color rgba="0.2 1 0.2 1"/>
-            </material>
+            <material name="green"/>
         </visual>
         <visual>
             <origin xyz="0.0 0.09 0.05" rpy="1.5708 0 0"/>
