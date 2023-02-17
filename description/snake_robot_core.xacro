@@ -3,23 +3,12 @@
 
     <xacro:include filename="inertial_macros.xacro"/>
     
+    <!-- Constants for robot dimensions -->
+    <xacro:property name="PI" value="3.1415926535897931"/>
 
-    <material name="white">
-        <color rgba="1 1 1 1"/>
-    </material>
+    <!-- * * * * * * my file working fine * * * * * * * -->
 
-    <material name="orange">
-        <color rgba="1 0.3 0.1 1"/>
-    </material>
 
-    <material name="blue">
-        <color rgba="0.2 0.2 1 1"/>
-    </material>
-
-    <material name="black">
-        <color rgba="0 0 0 1"/>
-    </material>
-    
 
 
     <!-- * * * BASE_LINK * * * -->
@@ -34,6 +23,7 @@
         <axis xyz="0 0 1"/>
     </joint>
   
+     <!-- TAIL LINK WHICH I HAVE CALLED FOR HEAD LINK -->
 
     <link name="head_link">
         <visual>
@@ -56,11 +46,15 @@
         </xacro:inertial_box>
     </link>
 
+    <!-- GAZEBO COLOR CONFIG -->
+
     <gazebo reference="head_link">
         <material>Gazebo/White</material>
     </gazebo>
 
-    <joint name="head_1_joint" type="revolute">
+    <!-- JOINT BETWEEN THE TAIL AND THE FIRST LINK -->
+
+    <joint name="link_head_1_joint" type="revolute">
         <parent link="head_link"/>
         <child link="link_1"/>
         <limit lower="-1.5708" upper="1.5708" velocity="50.0" effort="1000.0"/>
@@ -68,7 +62,7 @@
         <axis xyz="0 0 1"/>
     </joint>
     
-
+    <!-- LINK 1 -->
 
     <link name="link_1">
         <visual>
@@ -91,11 +85,15 @@
         </xacro:inertial_box>
     </link>
 
+        <!-- GAZEBO COLOR CONFIG -->
+
     <gazebo reference="head_link">
         <material>Gazebo/Black</material>
     </gazebo>
-        
-    <joint name="1_2_joint" type="revolute">
+    
+    <!-- JOINT BETWEEM LINK 1 AND 2 -->
+
+    <joint name="link_1_2_joint" type="revolute">
         <parent link="link_1"/>
         <child link="link_2"/>
         <limit lower="-1.5708" upper="1.5708" velocity="50.0" effort="1000.0"/>
@@ -103,7 +101,7 @@
         <axis xyz="0 0 1"/>
     </joint>
     
-
+    <!-- LINK 2 -->
 
     <link name="link_2">
         <visual>
@@ -126,11 +124,15 @@
         </xacro:inertial_box>
     </link>   
        
+        <!-- GAZEBO COLOR CONFIG -->
+
     <gazebo reference="head_link">
         <material>Gazebo/Blue</material>
     </gazebo>
 
-    <joint name="2_3_joint" type="revolute">
+    <!--JOINT BETWEEN LINK 2 AND LINK 3 -->
+
+    <joint name="link_2_3_joint" type="revolute">
         <parent link="link_2"/>
         <child link="link_3"/>
         <limit lower="-1.5708" upper="1.5708" velocity="50.0" effort="1000.0"/>
@@ -138,7 +140,7 @@
         <axis xyz="0 0 1"/>
     </joint>
     
-
+    <!-- LINK 3 -->
 
     <link name="link_3">
         <visual>
@@ -160,12 +162,16 @@
             <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
     </link>
-        
+       
+        <!-- GAZEBO COLOR CONFIG -->
+
     <gazebo reference="head_link">
         <material>Gazebo/White</material>
     </gazebo>
        
-    <joint name="3_4_joint" type="revolute">
+    <!-- JOINT BETWEEN LINK 3 AND LINK 4 ***NOTE THAT LINK 4 IS THE HEAD -->
+
+    <joint name="link_3_4_joint" type="revolute">
         <parent link="link_3"/>
         <child link="link_4"/>
         <limit lower="-1.5708" upper="1.5708" velocity="50.0" effort="1000.0"/>
@@ -173,7 +179,7 @@
         <axis xyz="0 0 1"/>
     </joint>
     
-
+    <!-- HEAD LINK -->
 
     <link name="link_4">
         <visual>
@@ -195,6 +201,8 @@
             <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
     </link>
+
+    <!-- GAZEBO COLOR CONFIG -->
 
     <gazebo reference="head_link">
         <material>Gazebo/Blue</material>

@@ -8,7 +8,7 @@
 
     <!-- THIS PLUGIN IMPORTED FROM URDF FILE FOR ROBOTIC ARM AND NEED TO BE 
         EDITED ACCORDING TO THE OTHER FILES NEEDED TO WORK PROPERLY-->
-
+        
     <gazebo>
         <plugin name="gazebo_ros_joint_pose_trajectory"
             filename="libgazebo_ros_joint_pose_trajectory.so">
@@ -26,11 +26,7 @@
 
 
 
-
-
-
-
-        <!-- This file demonstrates the use of some <gazebo> tags -->
+    <!-- This file demonstrates the use of some <gazebo> tags -->
 
     <!-- To include it add the following line -->
     <!-- <xacro:include filename="example_gazebo.xacro" /> -->
@@ -145,8 +141,5 @@
     </gazebo>
 
 
-
-
-</robot>
 
 </robot>

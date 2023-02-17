@@ -1,1 +1,26 @@
 # This is an empty file, so that git commits the folder correctly
+
+snake_robot:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+  
+  # Position Controllers ---------------------------------------
+  link_head_1_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  _1_2_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  link_2_3_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: joint3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+      joint3_position_controller:
+  link_3_4_joint_position_controller: 
+    type: effort_controllers/JointPositionController
+    joint: joint3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
