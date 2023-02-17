@@ -34,6 +34,7 @@
         <axis xyz="0 0 1"/>
     </joint>
   
+
     <link name="head_link">
         <visual>
             <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
@@ -55,6 +56,9 @@
         </xacro:inertial_box>
     </link>
 
+    <gazebo reference="head_link">
+        <material>Gazebo/White</material>
+    </gazebo>
 
     <joint name="head_1_joint" type="revolute">
         <parent link="head_link"/>
@@ -87,6 +91,9 @@
         </xacro:inertial_box>
     </link>
 
+    <gazebo reference="head_link">
+        <material>Gazebo/Black</material>
+    </gazebo>
         
     <joint name="1_2_joint" type="revolute">
         <parent link="link_1"/>
@@ -119,6 +126,10 @@
         </xacro:inertial_box>
     </link>   
        
+    <gazebo reference="head_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
     <joint name="2_3_joint" type="revolute">
         <parent link="link_2"/>
         <child link="link_3"/>
@@ -150,8 +161,9 @@
         </xacro:inertial_box>
     </link>
         
-
-
+    <gazebo reference="head_link">
+        <material>Gazebo/White</material>
+    </gazebo>
        
     <joint name="3_4_joint" type="revolute">
         <parent link="link_3"/>
@@ -184,6 +196,8 @@
         </xacro:inertial_box>
     </link>
 
-
+    <gazebo reference="head_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
 
 </robot>
