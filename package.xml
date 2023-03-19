@@ -14,8 +14,17 @@
   <exec_depend>rviz</exec_depend>
   <exec_depend>xacro</exec_depend>
   <exec_depend>rclpy</exec_depend>
+<<<<<<< HEAD
   <exec_depend>rclcpp</exec_depend>
   <exec_depend>std_msgs</exec_depend>
+=======
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>trajectory_msgs</exec_depend>
+  
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+>>>>>>> be722dd2fb4eeef3b52bb3a0480eb8f5051c0f1d
 
   <export>
     <build_type>ament_cmake</build_type>
