@@ -31,7 +31,7 @@ def phi_angle_generator_at_t(timer):
                 phi0 = np.deg2rad(5)
                 temp_JA[i] = ( a * np.sin(w * timer + i * d) + phi0)
   
-            elif 50 <= timer <= 60:
+            elif 50 <= timer <= 70:
                 phi0 = np.deg2rad(-10)
                 temp_JA[i] = ( a * np.sin(w * timer + i * d) + phi0)
 
