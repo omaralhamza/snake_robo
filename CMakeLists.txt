@@ -54,9 +54,5 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-<<<<<<< HEAD
-
-=======
->>>>>>> be722dd2fb4eeef3b52bb3a0480eb8f5051c0f1d
 
 ament_package()
