@@ -27,7 +27,7 @@ def phi_angle_generator_at_t(timer):
       #  global j_angle_ta
         
         N = 10
-        a = 3                               # Alpha value of the equation
+        a = 100                              # Alpha value of the equation
         w = 0.872665  *0.5                       # Freq_w of the equation of the angle
         d = 0.698132                         # Delta, which is the value of the phase shift in the equation of the angle
         phi0 = 0                             # Offset angle
@@ -130,32 +130,32 @@ class 	EffortPublisher(Node): # The Publisher class is created, which inherits f
         set_point, Velocity , Acceleration  = phi_angle_generator_at_t(timer_timer)
         
         for i in range(0,9):
-           U_Value[i] = Acceleration[i] + k_d * ( set_point[i] - FeedBack[i] ) + k_p * (Velocity[i] - Vel_FeedBack[i])
+           U_Value[i] = (Acceleration[i] + k_d * ( set_point[i] - FeedBack[i] ) + k_p * (Velocity[i] - Vel_FeedBack[i]))
         # creating an array of values to be sent to the joints
         
         
         
         
-        value1 = U_Value[0] 
+        value1 = U_Value[8] 
                                                  #[1.5708,0.0,0.0,0.0,-1.5708,0.0,0.0,0.0,1.5708]
-        value2 = U_Value[1] 
+        value2 = U_Value[7] 
        
-        value3 = U_Value[2] 
+        value3 = U_Value[6] 
        
-        value4 = U_Value[3]
+        value4 = U_Value[5]
        
         value5 = U_Value[4]
         
-        value6 = U_Value[5]
+        value6 = U_Value[3]
         
-        value7 = U_Value[6]
+        value7 = U_Value[2]
         
-        value8 = U_Value[7]
+        value8 = U_Value[1]
         
-        value9 = U_Value[8]
+        value9 = U_Value[0]
         
         msg = Float64MultiArray()
-        msg.data = [value1,value2,value3,value4,value5,value6,value7,value8,value9]
+        msg.data = [value9,value8,value7,value6,value5,value4,value3,value2,value1]
         
         self.Effort_publisher.publish(msg)
         print(set_point)
