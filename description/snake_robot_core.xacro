@@ -1,95 +1,47 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  >
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="snake_robot" >
 
     <xacro:include filename="inertial_macros.xacro"/>
     <xacro:include filename="materials.xacro"/> 
-    <xacro:include filename="gazebo_control.xacro"/> 
-    <!-- Constants for robot dimensions -->
+    <xacro:include filename="ros2_control.xacro" />
+   
+   <!-- Constants for robot dimensions -->
     <xacro:property name="PI" value="3.1415926535897931"/>
-
-    <!-- * * * * * * my file working fine * * * * * * * -->
-
-
-
-
-    <!-- * * * BASE_LINK * * * -->
-   <!-- <link name="world"></link>-->
-
- <!-- *********************what type of joint should we have here is it contineus and o we need world link at all-->
- <!-- *********************what type of joint should we have here is it contineus and o we need world link at all--> 
- <!-- *********************what type of joint should we have here is it contineus -->
-
- <!--
-    <joint name="head_joint" type="continuous">
-        <origin xyz="0.0 0.0 0.00" />
-        <parent link="world"/>
-        <child link="head_link"/>
-        <axis xyz="0 0 1"/>
-    </joint>
--->
-
-     <!-- TAIL LINK WHICH I HAVE CALLED FOR HEAD LINK -->
-
-    <link name="head_link">
-        <visual>
-            <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
-            <geometry>
-                <box size="0.1 0.3 0.1"/>
-            </geometry>
-            <material name="green"/>
-        </visual>
-        <collision>
-            <origin xyz="0.0 0.15 0.05" />
-            <geometry>
-                <box size="0.1 0.3 0.1"/>
-            </geometry>
-        </collision>
-        <xacro:inertial_box mass="0.1" x="0.3" y="0.1" z="0.1">
-            <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
-        </xacro:inertial_box>
-    </link>
-
-    <!-- JOINT BETWEEN THE TAIL AND THE FIRST LINK -->
-
-    <joint name="link_head_1_joint" type="revolute">
-        <parent link="head_link"/>
-        <child link="link_1"/>
-        <limit lower="-1.5708" upper="1.5708" velocity="50.0" effort="1000.0"/>
-        <origin xyz="0.0 0.3 0.0" />
-        <axis xyz="0 0 1"/>
-        <joint_properties damping="6.0" friction="6.0"/>
-    </joint>
     
-    <!-- LINK 1 -->
 
+    <odometry_frame>odom</odometry_frame>
+    <robot_base_frame>link_1</robot_base_frame>
+    <publish_odom>true</publish_odom>
+    <publish_odom_tf>true</publish_odom_tf>
+    <publish_joint_tf></publish_joint_tf>
+
+    <!--LINK_1 -->
     <link name="link_1">
         <visual>
-            <material name="black"/>
-            <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
-             <geometry>
-                <box size="0.1 0.3 0.1"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.06 0.14 0.06"/>
             </geometry>
+            <material name="orange"/>
         </visual>
         <collision>
-            <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
             <geometry>
-                <box size="0.1 0.3 0.1"/>
+                <box size="0.06 0.14 0.06"/>
             </geometry>
-        </collision>        
-        <xacro:inertial_box mass="0.1" x="0.3" y="0.1" z="0.1">
-            <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
+        </collision>
+        <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
     </link>
 
-
-    
-    <!-- JOINT BETWEEM LINK 1 AND 2 -->
+    <!-- JOINT BETWEEN THE Link_1 AND THE  Link_2 -->
 
     <joint name="link_1_2_joint" type="revolute">
         <parent link="link_1"/>
         <child link="link_2"/>
-        <limit lower="-1.5708" upper="1.5708" velocity="50.0" effort="1000.0"/>
-        <origin xyz="0.0 0.3 0.00" />    
+        <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10.0" effort="200.0"/>
+        <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
         <axis xyz="0 0 1"/>
         <joint_properties damping="6.0" friction="6.0"/>
     </joint>
@@ -98,32 +50,32 @@
 
     <link name="link_2">
         <visual>
-            <material name="orange"/>
-            <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>           
-            <geometry>
-                <box size="0.1 0.3 0.1"/>
+            <material name="black"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
+             <geometry>
+                <box size="0.06 0.14 0.06"/>
             </geometry>
         </visual>
         <collision>
-            <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
             <geometry>
-                <box size="0.1 0.3 0.1"/>
+                <box size="0.06 0.14 0.06"/>
             </geometry>
         </collision>
-        <xacro:inertial_box mass="0.1" x="0.3" y="0.1" z="0.1">
-            <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
+        <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
-    </link>   
-       
+    </link>
 
 
-    <!--JOINT BETWEEN LINK 2 AND LINK 3 -->
+    
+    <!-- JOINT BETWEEM LINK 2 AND 3 -->
 
     <joint name="link_2_3_joint" type="revolute">
         <parent link="link_2"/>
         <child link="link_3"/>
-        <limit lower="-1.5708" upper="1.5708" velocity="50.0" effort="1000.0"/>
-        <origin xyz="0.0 0.3 0.0" rpy="0 0 0"/>
+        <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10.0" effort="200.0"/>
+        <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
         <axis xyz="0 0 1"/>
         <joint_properties damping="6.0" friction="6.0"/>
     </joint>
@@ -132,95 +84,252 @@
 
     <link name="link_3">
         <visual>
-            <material name="black"/>
-            <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
+            <material name="orange"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>           
             <geometry>
-                <box size="0.1 0.3 0.1"/>
+                <box size="0.06 0.14 0.06"/>
             </geometry>
         </visual>
         <collision>
-            <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
             <geometry>
-                <box size="0.1 0.3 0.1"/>
+                <box size="0.06 0.14 0.06"/>
             </geometry>
         </collision>
-        <xacro:inertial_box mass="0.1" x="0.3" y="0.1" z="0.1">
-            <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
+        <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
-    </link>
+    </link>   
        
 
-    <!-- JOINT BETWEEN LINK 3 AND LINK 4 ***NOTE THAT LINK 4 IS THE HEAD -->
+
+    <!--JOINT BETWEEN LINK 3 AND LINK 4 -->
 
     <joint name="link_3_4_joint" type="revolute">
         <parent link="link_3"/>
         <child link="link_4"/>
-        <limit lower="-1.5708" upper="1.5708" velocity="50.0" effort="1000.0"/>
-        <origin xyz="0.0 0.3 0.0" rpy="0 0 0"/>
+        <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10.0" effort="200.0"/>
+        <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
         <axis xyz="0 0 1"/>
         <joint_properties damping="6.0" friction="6.0"/>
     </joint>
     
-    <!-- HEAD LINK -->
+    <!-- LINK 4 -->
 
     <link name="link_4">
         <visual>
-            <material name="orange"/>
-            <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>  
+            <material name="black"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
             <geometry>
-                <box size="0.1 0.3 0.1"/>
+                <box size="0.06 0.14 0.06"/>
             </geometry>
         </visual>
         <collision>
-            <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
             <geometry>
-                <box size="0.1 0.3 0.1"/>
+                <box size="0.06 0.14 0.06"/>
             </geometry>
         </collision>
-        <xacro:inertial_box mass="0.1" x="0.3" y="0.1" z="0.1">
-            <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
+        <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
     </link>
+       
 
+   
 
-    <!-- camera_joint describes where the camera is relative to the arm -->
-    <!-- - Even though the camera isn't moving relative to the arm, it will probably be helpful to have its own link/frame rather than just adding more visuals to the arm -->
-    <!-- - For this example, the camera_link origin will be at the centre of the camera's "sensor" -->
-    <joint name="camera_joint" type="fixed">
-        <origin xyz="0 0.3 0" rpy="0 0 0"/>
+    <joint name="link_4_5_joint" type="revolute">
         <parent link="link_4"/>
-        <child link="camera_link"/>        
+        <child link="link_5"/>
+        <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10.0" effort="200.0"/>
+        <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <joint_properties damping="6.0" friction="6.0"/>
     </joint>
+    
+    <!-- LINK 5-->
 
-
-    <!-- camera_link describes the camera at the end of the arm -->
-    <!-- - It has multiple visual elements, which ultimately get combined together -->
-    <!-- - Even if we specify different materials, RViz will just colour them all the same as the first -->
-    <!-- - Although we could also specify multiple collision geometries, instead we just use a single box that encompasses the whole camera -->
-    <link name="camera_link">
+    <link name="link_5">
         <visual>
-            <origin xyz="0.00 0.03 0.05" rpy="0 0 0"/>
+            <material name="orange"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>  
             <geometry>
-                <box size="0.1 0.06 0.1" />
+                <box size="0.06 0.14 0.06"/>
             </geometry>
-            <material name="green"/>
-        </visual>
-        <visual>
-            <origin xyz="0.0 0.09 0.05" rpy="1.5708 0 0"/>
-            <geometry>
-                <cylinder length="0.06" radius="0.04" />
-            </geometry>
-            <material name="blue" />
         </visual>
         <collision>
-            <origin xyz="0.0 0 0" rpy="0 0 0"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
             <geometry>
-                <box size="0.1 0.15 0.1" />
+                <box size="0.06 0.14 0.06"/>
             </geometry>
         </collision>
-        <xacro:inertial_box mass="0.05" x="0.12" y="0.15" z="0.15">
-            <origin xyz="0.0 0.15 0.05" rpy="0.0 0.0 0.0"/>
+        <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
     </link>
+
+
+
+    <joint name="link_5_6_joint" type="revolute">
+        <parent link="link_5"/>
+        <child link="link_6"/>
+        <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10.0" effort="200.0"/>
+        <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <joint_properties damping="6.0" friction="6.0"/>
+    </joint>
+    
+    <!--  LINK 6-->
+
+    <link name="link_6">
+        <visual>
+            <material name="black"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>  
+            <geometry>
+                <box size="0.06 0.14 0.06"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.06 0.14 0.06"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
+        </xacro:inertial_box>
+    </link>
+
+    <!-- JOINT BETWEEN LINK 6 AND LINK 7 -->
+
+    <joint name="link_6_7_joint" type="revolute">
+        <parent link="link_6"/>
+        <child link="link_7"/>
+        <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10.0" effort="200.0"/>
+        <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <joint_properties damping="6.0" friction="6.0"/>
+    </joint>
+    
+    <!--  LINK 7-->
+
+    <link name="link_7">
+        <visual>
+            <material name="orange"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>  
+            <geometry>
+                <box size="0.06 0.14 0.06"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.06 0.14 0.06"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
+        </xacro:inertial_box>
+    </link>
+
+
+    <!-- JOINT BETWEEN LINK 7 AND LINK 8 -->
+
+    <joint name="link_7_8_joint" type="revolute">
+        <parent link="link_7"/>
+        <child link="link_8"/>
+        <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10.0" effort="200.0"/>
+        <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <joint_properties damping="6.0" friction="6.0"/>
+    </joint>
+    
+    <!--  LINK 8-->
+
+    <link name="link_8">
+        <visual>
+            <material name="black"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>  
+            <geometry>
+                <box size="0.06 0.14 0.06"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.06 0.14 0.06"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
+        </xacro:inertial_box>
+    </link>
+
+
+    <!-- JOINT BETWEEN LINK 8 AND LINK 9 -->
+
+    <joint name="link_8_9_joint" type="revolute">
+        <parent link="link_8"/>
+        <child link="link_9"/>
+        <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10.0" effort="200.0"/>
+        <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <joint_properties damping="6.0" friction="6.0"/>
+    </joint>
+    
+    <!--  LINK 9-->
+
+    <link name="link_9">
+        <visual>
+            <material name="orange"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>  
+            <geometry>
+                <box size="0.06 0.14 0.06"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.06 0.14 0.06"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
+        </xacro:inertial_box>
+    </link>
+
+    <!-- JOINT BETWEEN LINK 9 AND LINK 10 -->
+
+    <joint name="link_9_10_joint" type="revolute">
+        <parent link="link_9"/>
+        <child link="link_10"/>
+        <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10" effort="200.0"/>
+        <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <joint_properties damping="6.0" friction="6.0"/>
+    </joint>
+    
+    <!--  LINK 10-->
+
+    <link name="link_10">
+        <visual>
+            <material name="black"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>  
+            <geometry>
+                <box size="0.06 0.14 0.06"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.06 0.14 0.06"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
+        </xacro:inertial_box>
+        
+    </link>
+    
 
 </robot>

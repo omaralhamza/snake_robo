@@ -62,16 +62,6 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        camera_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        head_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         link_1:
           Alpha: 1
           Show Axes: false
@@ -92,6 +82,37 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        link_5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_6:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_7:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_8:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_9:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_10:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+         
       Name: RobotModel
       TF Prefix: ""
       Update Interval: 0
@@ -102,10 +123,6 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        camera_link:
-          Value: true
-        head_link:
-          Value: true
         link_1:
           Value: true
         link_2:
@@ -114,25 +131,41 @@ Visualization Manager:
           Value: true
         link_4:
           Value: true
+        link_5:
+          Value: true
+        link_6:
+          Value: true
+        link_7:
+          Value: true
+        link_8:
+          Value: true
+        link_9:
+          Value: true
+        link_10:
+          Value: true            
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: false
       Tree:
-        head_link:
-          link_1:
-            link_2:
-              link_3:
-                link_4:
-                  camera_link:
-                    {}
+        link_1:
+          link_2:
+            link_3:
+              link_4:
+                link_5:
+                  link_6:
+                    link_7:
+                      link_8:
+                        link_9:
+                          link_10:
+                              {}
       Update Interval: 0
       Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: head_link
+    Fixed Frame: link_1
     Frame Rate: 30
   Name: root
   Tools:

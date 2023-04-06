@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="snake_robot" >
 
     <!-- This file is not a robot in and of itself, it just contains some useful tags that could be included in any robot -->
 
