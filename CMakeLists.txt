@@ -23,6 +23,25 @@ find_package(rclpy REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+install(
+  DIRECTORY config description launch worlds rviz
+  DESTINATION share/${PROJECT_NAME}
+)
+
+
+
+install(PROGRAMS
+  scripts/publisher_node.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+
+install(
+  DIRECTORY config description launch worlds rviz 
+  DESTINATION share/${PROJECT_NAME}
+)
+
+
 
 
 install(PROGRAMS
@@ -49,6 +68,9 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ab5ac2b2b4b045e989698e3666a603df837d746b
 
 ament_package()
