@@ -8,11 +8,11 @@
     <!-- A ground plane -->
     <include>
       <uri>model://ground_plane</uri>
-      <pose> 0 5 0 0 0 0 </pose>
+      <pose> 0 0 0 0 0 0 </pose>
     </include>
     <include>
       <uri>model://my_ground_plane</uri>
-      <pose> 0 10 0 0 0 0 </pose>
+      <pose> 0 5 0 0 0 0 </pose>
     </include>    
   </world>
 </sdf>

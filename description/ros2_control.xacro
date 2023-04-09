@@ -4,61 +4,61 @@
      <gazebo reference="link_1">
         <material>Gazebo/Orange</material> 
         <mu1>0.05</mu1>         
-        <mu2>0.5</mu2>           
+        <mu2>0.5</mu2>                                     
     </gazebo>
 
     <gazebo reference="link_2">
         <material>Gazebo/Black</material> 
         <mu1>0.05</mu1>         
-        <mu2>0.5</mu2>     
+        <mu2>0.5</mu2>                               
     </gazebo>
 
     <gazebo reference="link_3">
         <material>Gazebo/Orange</material> 
         <mu1>0.05</mu1>         
-        <mu2>0.5</mu2>     
+        <mu2>0.5</mu2>                               
     </gazebo>
 
     <gazebo reference="link_4">
         <material>Gazebo/Black</material> 
         <mu1>0.05</mu1>         
-        <mu2>0.5</mu2>     
+        <mu2>0.5</mu2>                               
     </gazebo>
 
     <gazebo reference="link_5">
         <material>Gazebo/Orange</material> 
         <mu1>0.05</mu1>         
-        <mu2>0.5</mu2>     
+        <mu2>0.5</mu2>                               
     </gazebo>
 
     <gazebo reference="link_6">
         <material>Gazebo/Black</material> 
         <mu1>0.05</mu1>         
-        <mu2>0.5</mu2>     
+        <mu2>0.5</mu2>                               
     </gazebo>
 
     <gazebo reference="link_7">
         <material>Gazebo/Orange</material> 
         <mu1>0.05</mu1>         
-        <mu2>0.5</mu2>     
+        <mu2>0.5</mu2>                               
     </gazebo>
 
     <gazebo reference="link_8">
         <material>Gazebo/Black</material> 
         <mu1>0.05</mu1>         
-        <mu2>0.5</mu2>     
+        <mu2>0.5</mu2>                               
     </gazebo>
 
     <gazebo reference="link_9">
         <material>Gazebo/Orange</material> 
         <mu1>0.05</mu1>         
-        <mu2>0.5</mu2>     
+        <mu2>0.5</mu2>                               
     </gazebo>
 
     <gazebo reference="link_10">
         <material>Gazebo/Black</material> 
         <mu1>0.05</mu1>         
-        <mu2>0.5</mu2>     
+        <mu2>0.5</mu2>                               
     </gazebo>
 
     <ros2_control name="GazeboSystem" type="system">
