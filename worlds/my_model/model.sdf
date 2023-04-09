@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.5">
-  <model name="ground_plane">
+  <model name="my_ground_plane">
     <static>true</static>
     <link name="link">
       <collision name="collision">
@@ -30,7 +30,7 @@
         <material>
           <script>
             <uri>file://media/materials/scripts/gazebo.material</uri>
-            <name>Gazebo/Grey</name>
+            <name>Gazebo/Blue</name>
           </script>
         </material>
       </visual>

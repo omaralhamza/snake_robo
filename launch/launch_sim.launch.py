@@ -39,24 +39,26 @@ def generate_launch_description():
     
     
     
+    map_l = IncludeLaunchDescription(
+                PythonLaunchDescriptionSource([os.path.join(
+                    get_package_share_directory(package_name),'launch','map.launch.py'
+                )]))
+    
     
     DeclareLaunchArgument(
             'world',
             default_value=[os.path.join(
             pkg_share, world_relative_path, world_filename)],
-            description='SDF world file'),
-    
-    
-    
-    
-                                     
+            description='SDF world file')
+                                      
 
     rsp = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
                     get_package_share_directory(package_name),'launch','rsp.launch.py'
                 )]), launch_arguments={'use_sim_time': 'true'}.items()
        ) 
-
+       
+     
     # Include the Gazebo launch file, provided by the gazebo_ros package
     gazebo = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
@@ -92,16 +94,13 @@ def generate_launch_description():
      )     
      
      
-    #load_trajectory_controller = ExecuteProcess(
-     #   cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-      #       'joint_trajectory_controller'],
-       # output='screen'
-    #)           
+         
 
     # Launch them all!
     return LaunchDescription([
         rviz_arg,    
         rsp,
+        map_l,
         gazebo,
         spawn_entity,
         rviz_node,

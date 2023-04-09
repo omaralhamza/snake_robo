@@ -27,7 +27,7 @@ def phi_angle_generator_at_t(timer):
       #  global j_angle_ta
         
         N = 10
-        a = 23.6                   # Alpha value of the equation
+        a = 50                   # Alpha value of the equation
         w = 0.872665 *0.46            # Freq_w of the equation of the angle
         d = 0.698132                        # Delta, which is the value of the phase shift in the equation of the angle
         phi0 = 0                             # Offset angle
