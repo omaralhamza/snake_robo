@@ -27,6 +27,7 @@ find_package(rclpy REQUIRED)
 
 install(PROGRAMS
   scripts/publisher_node.py
+  scripts/ui_simulation_bridge.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

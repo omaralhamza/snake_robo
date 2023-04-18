@@ -16,11 +16,9 @@ def generate_launch_description():
     pkg_dolly_gazebo = get_package_share_directory('my_bot')
 
 
-
     return LaunchDescription([
         DeclareLaunchArgument(
           'world',
           default_value=[os.path.join(pkg_dolly_gazebo, 'worlds', 'empty.world'), ''],
           description='SDF world file'),
-    
     ])
