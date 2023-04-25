@@ -36,24 +36,23 @@ class 	EffortPublisher(Node): # The Publisher class is created, which inherits f
         self.Effort_publisher = self.create_publisher(Float64MultiArray,"/effort_controllers/commands", 10)
         self.subscription = self.create_subscription(JointState, 'joint_states', self.PID_callback, 10)
         self.params       = self.create_subscription(String, 'snake_robot_params', self.paramters_from_ui, 10)
-
-        self.subscription
-        self.timer_timer = 0 
-        self.default_kp = 0.7
-        self.default_kd = 0.01        
         #self.default_kp = 0.01 seems to be working without friction applied in ros2 control
         #self.default_kd = 0.01 seems to be working without friction applied in ros2 control
         #self.default_kp = 0.0001 working values
         #self.default_kd = 0.0001
-        self.default_a = 72
         #self.default_a = 70 seems to be working without friction applied in ros2 control
         #self.default_a = 67.5 working values with ros2_control gazebo friction mu1 0.1 and mu2=1
         #self.default_w = 0.61  working values 
+        #self.default_w = 0.55 seems to be working without friction applied in ros2 control
+        self.subscription
+        self.timer_timer = 0 
+        self.default_kp = 0.7
+        self.default_kd = 0.01 
+        self.default_a = 70
         self.default_w = 0.45
         self.default_d = 0.698132
         self.default_phi0 = 0
         self.default_phi1 = 0
-        #self.default_w = 0.55 seems to be working without friction applied in ros2 control
         self.k_d = self.default_kp
         self.k_p = self.default_kd 
         self.var_a = self.default_a
@@ -187,7 +186,7 @@ class 	EffortPublisher(Node): # The Publisher class is created, which inherits f
         
         self.timer_timer = self.timer_timer + 1
         
-        if self.timer_timer >2000: 
+        if self.timer_timer >10000: 
         	self.timer_timer = 0
         	
       	
