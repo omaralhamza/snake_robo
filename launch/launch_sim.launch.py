@@ -70,7 +70,20 @@ def generate_launch_description():
                         arguments=['-topic', 'robot_description',
                                    '-entity', 'snake_robot'],
                         output='screen')
-
+    
+    gui =  IncludeLaunchDescription(
+                PythonLaunchDescriptionSource([os.path.join(
+                    get_package_share_directory(package_name),'launch','snake_robot.py'
+                )]), launch_arguments={'use_sim_time': 'true'}.items()
+       ) 
+    
+    simulation_bridge =  IncludeLaunchDescription(
+                PythonLaunchDescriptionSource([os.path.join(
+                    get_package_share_directory(package_name),'launch','ui_simulation_bridge.py'
+                )]), launch_arguments={'use_sim_time': 'true'}.items()
+       ) 
+    
+    
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
@@ -93,7 +106,7 @@ def generate_launch_description():
     arguments=["effort_controllers"],
      )     
      
-     
+ 
          
 
     # Launch them all!
@@ -106,6 +119,7 @@ def generate_launch_description():
         rviz_node,
         joint_broad_spawner,
         effort_spawner
+       
         #load_trajectory_controller,
         
               ])

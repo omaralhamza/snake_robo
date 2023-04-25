@@ -42,7 +42,7 @@
         <child link="link_2"/>
         <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10.0" effort="200.0"/>
         <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
-        <axis xyz="0 0 1"/>
+        <axis xyz=" 0 0 1 "/>
         <joint_properties damping="8.0" friction="2.0"/>
     </joint>
     
@@ -76,7 +76,7 @@
         <child link="link_3"/>
         <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10.0" effort="200.0"/>
         <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
-        <axis xyz="0 0 1"/>
+        <axis xyz=" 0 0 1 "/>
         <joint_properties damping="8.0" friction="2.0"/>
     </joint>
     
@@ -110,7 +110,7 @@
         <child link="link_4"/>
         <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10.0" effort="200.0"/>
         <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
-        <axis xyz="0 0 1"/>
+        <axis xyz=" 0 0 1 "/>
         <joint_properties damping="8.0" friction="2.0"/>
     </joint>
     
@@ -143,7 +143,7 @@
         <child link="link_5"/>
         <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10.0" effort="200.0"/>
         <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
-        <axis xyz="0 0 1"/>
+        <axis xyz=" 0 0 1 "/>
         <joint_properties damping="8.0" friction="2.0"/>
     </joint>
     
@@ -175,7 +175,7 @@
         <child link="link_6"/>
         <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10.0" effort="200.0"/>
         <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
-        <axis xyz="0 0 1"/>
+        <axis xyz=" 0 0 1 "/>
         <joint_properties damping="8.0" friction="2.0"/>
     </joint>
     
@@ -207,7 +207,7 @@
         <child link="link_7"/>
         <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10.0" effort="200.0"/>
         <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
-        <axis xyz="0 0 1"/>
+        <axis xyz=" 0 0 1 "/>
         <joint_properties damping="8.0" friction="2.0"/>
     </joint>
     
@@ -240,7 +240,7 @@
         <child link="link_8"/>
         <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10.0" effort="200.0"/>
         <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
-        <axis xyz="0 0 1"/>
+        <axis xyz=" 0 0 1 "/>
         <joint_properties damping="8.0" friction="2.0"/>
     </joint>
     
@@ -273,7 +273,7 @@
         <child link="link_9"/>
         <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10.0" effort="200.0"/>
         <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
-        <axis xyz="0 0 1"/>
+        <axis xyz=" 0 0 1 "/>
         <joint_properties damping="8.0" friction="2.0"/>
     </joint>
     
@@ -305,7 +305,7 @@
         <child link="link_10"/>
         <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10.0" effort="200.0"/>
         <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
-        <axis xyz="0 0 1"/>
+        <axis xyz=" 0 0 1 "/>
         <joint_properties damping="8.0" friction="2.0"/>
     </joint>
     
@@ -313,7 +313,7 @@
 
     <link name="link_10">
         <visual>
-            <material name="black"/>
+            <material name="blue"/>
             <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>  
             <geometry>
                 <box size="0.06 0.14 0.06"/>

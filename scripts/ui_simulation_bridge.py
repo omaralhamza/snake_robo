@@ -11,10 +11,10 @@ class ParamsPublisher(Node):
     def __init__(self):
         # Initialize Variables
         super().__init__('ui_simulation_bridge')
-        self.params_publisher_pub               = self.create_publisher(String, 'snake_robot_params', 10)
-        socket_port                          = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.params_publisher_pub           = self.create_publisher(String, 'snake_robot_params', 10)
+        socket_port                         = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         soc_connection                      = socket_port.connect(("8.8.8.8", 80))
-        self.ip_address                      = socket_port.getsockname()[0]
+        self.ip_address                     = socket_port.getsockname()[0]
         self.mqtt_address                   = self.ip_address
         self.mqtt_user                      = 'snake'
         self.mqtt_passowrd                  = 'classic'

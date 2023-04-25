@@ -19,7 +19,7 @@ class SliderWindow(QWidget):
     def __init__(self):
         super().__init__()
 
-        # Create four sliders
+        # Create 7 sliders
         self.scale_factor = 100
         #self.scale_factor = 1000
         self.k_p = QSlider()
@@ -38,18 +38,37 @@ class SliderWindow(QWidget):
         self.var_w.setOrientation(Qt.Vertical)
         self.var_w.setMinimum(1) # Actual value is equal to this divided by self.scale_factor
         self.var_w.setMaximum(10000) # Actual value is equal to this divided by self.scale_factor
-
-        # Create four labels for the sliders
+        self.var_d = QSlider()
+        self.var_d.setOrientation(Qt.Vertical)
+        self.var_d.setMinimum(1) # Actual value is equal to this divided by self.scale_factor
+        self.var_d.setMaximum(10000) # Actual value is equal to this divided by self.scale_factor        
+        self.var_phi0 = QSlider()
+        self.var_phi0.setOrientation(Qt.Vertical)
+        self.var_phi0.setMinimum(1) # Actual value is equal to this divided by self.scale_factor
+        self.var_phi0.setMaximum(10000) # Actual value is equal to this divided by self.scale_factor
+        self.var_phi1 = QSlider()
+        self.var_phi1.setOrientation(Qt.Vertical)
+        self.var_phi1.setMinimum(1) # Actual value is equal to this divided by self.scale_factor
+        self.var_phi1.setMaximum(10000) # Actual value is equal to this divided by self.scale_factor
+        
+        # Create 7 labels for the sliders
         label1 = QLabel('k_p')
         label2 = QLabel('k_d')
         label3 = QLabel('a')
         label4 = QLabel('w')
+        label5 = QLabel('d')
+        label6 = QLabel('phi0')
+        label7 = QLabel('phi1')
+    
 
-        # Create four labels for the slider values
+        # Create 6 labels for the slider values
         value_label1 = QLabel()
         value_label2 = QLabel()
         value_label3 = QLabel()
         value_label4 = QLabel()
+        value_label5 = QLabel()
+        value_label6 = QLabel()
+        value_label7 = QLabel()
 
         # Create a layout for each slider
         layout1 = QVBoxLayout()
@@ -68,6 +87,18 @@ class SliderWindow(QWidget):
         layout4.addWidget(label4)
         layout4.addWidget(self.var_w)
         layout4.addWidget(value_label4)
+        layout5 = QVBoxLayout()
+        layout5.addWidget(label5)
+        layout5.addWidget(self.var_d)
+        layout5.addWidget(value_label5)
+        layout6 = QVBoxLayout()
+        layout6.addWidget(label6)
+        layout6.addWidget(self.var_phi0)
+        layout6.addWidget(value_label6)
+        layout7 = QVBoxLayout()
+        layout7.addWidget(label7)
+        layout7.addWidget(self.var_phi1)
+        layout7.addWidget(value_label7)
 
         # Create a layout for the window and add the slider layouts to it
         hbox = QHBoxLayout()
@@ -75,19 +106,25 @@ class SliderWindow(QWidget):
         hbox.addLayout(layout2)
         hbox.addLayout(layout3)
         hbox.addLayout(layout4)
+        hbox.addLayout(layout5)
+        hbox.addLayout(layout6)
+        hbox.addLayout(layout7)
 
         # Set the window layout
         self.setLayout(hbox)
 
         # Set the window size and title
-        self.setGeometry(100, 100, 400, 400)
+        self.setGeometry(100, 100, 450, 450)
         self.setWindowTitle('Snake Robot Parameters')
 
         # Connect the valueChanged signals of the sliders to update the value labels
         self.k_p.valueChanged.connect(lambda value: self.update_value_label(value_label1, value, 'k_p'))
         self.k_d.valueChanged.connect(lambda value: self.update_value_label(value_label2, value, 'k_d'))
         self.var_a.valueChanged.connect(lambda value: self.update_value_label(value_label3, value, 'a'))
-        self.var_w.valueChanged.connect(lambda value: self.update_value_label(value_label4, value, 'w'))
+        self.var_w.valueChanged.connect(lambda value: self.update_value_label(value_label4, value, 'w'))        
+        self.var_d.valueChanged.connect(lambda value: self.update_value_label(value_label5, value, 'd'))
+        self.var_phi0.valueChanged.connect(lambda value: self.update_value_label(value_label6, value, 'phi0'))
+        self.var_phi1.valueChanged.connect(lambda value: self.update_value_label(value_label7, value, 'phi1'))
 
     def update_value_label(self, label, value, title):
         # Update the value label with the slider value
