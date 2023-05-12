@@ -31,7 +31,7 @@
             </geometry>
         </collision>
         <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
-            <origin xyz="0.03 0.07 0.03" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
     </link>
 
@@ -63,7 +63,7 @@
             </geometry>
         </collision>
         <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
-            <origin xyz="0.03 0.07 0.03" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
     </link>
 
@@ -74,7 +74,8 @@
     <joint name="link_2_3_joint" type="revolute">
         <parent link="link_2"/>
         <child link="link_3"/>
-        <limit lower="-0.785398163397 " upper="0.785398163397" velocity="10.0" effort="200.0"/>
+        <limit lower="-0.785398163397 " upper="0.785398163397" 
+        velocity="10.0" effort="200.0"/>
         <origin xyz="0.0 0.175 0.0" rpy="0 0 0"/>
         <axis xyz=" 0 0 1 "/>
         <joint_properties damping="8.0" friction="2.0"/>
@@ -97,7 +98,7 @@
             </geometry>
         </collision>
         <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
-            <origin xyz="0.03 0.07 0.03" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
     </link>   
        
@@ -131,7 +132,7 @@
             </geometry>
         </collision>
         <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
-            <origin xyz="0.03 0.07 0.03" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
     </link>
        
@@ -164,7 +165,7 @@
             </geometry>
         </collision>
         <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
-            <origin xyz="0.03 0.07 0.03" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
     </link>
 
@@ -196,7 +197,7 @@
             </geometry>
         </collision>
         <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
-            <origin xyz="0.03 0.07 0.03" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
     </link>
 
@@ -228,7 +229,7 @@
             </geometry>
         </collision>
         <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
-            <origin xyz="0.03 0.07 0.03" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
     </link>
 
@@ -261,7 +262,7 @@
             </geometry>
         </collision>
         <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
-            <origin xyz="0.03 0.07 0.03" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
     </link>
 
@@ -294,7 +295,7 @@
             </geometry>
         </collision>
         <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
-            <origin xyz="0.03 0.07 0.03" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
     </link>
 
@@ -309,7 +310,7 @@
         <joint_properties damping="8.0" friction="2.0"/>
     </joint>
     
-    <!--  LINK 10-->
+    <!--  LINK 10 or Head link-->
 
     <link name="link_10">
         <visual>
@@ -326,7 +327,7 @@
             </geometry>
         </collision>
         <xacro:inertial_box mass="1" x="0.06" y="0.14" z="0.06">
-            <origin xyz="0.03 0.07 0.03" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.0 0.07 0.03" rpy="0.0 0.0 0.0"/>
         </xacro:inertial_box>
         
     </link>

@@ -1,17 +1,14 @@
 #!/usr/bin/env python3
 import rclpy # One if the Dependencies that needs to also be added to the package.xml file
-
 from rclpy.node import Node
-
 from builtin_interfaces.msg import Duration
 from std_msgs.msg import Float64MultiArray, String # One if the Dependencies that needs to also be added to the package.xml file
 from sensor_msgs.msg import JointState
-import math
+import math, os
 import numpy as np
+from datetime import datetime
 
 
-
-#j_angle_ta = np.empty(9,dtype=float) # Global variable that's used inside the sine-wave generating function
 
 
 FeedBack = np.empty(9,dtype=float)   #Global variable that contains the effort value of the feedback from the /Joint_states topic
@@ -20,6 +17,7 @@ set_point = np.empty(9,dtype=float)  #Global variable that contains the setpoint
 U_Value = np.empty(9,dtype=float)
 Velocity = np.empty(9,dtype=float)
 Acceleration = np.empty(9,dtype=float)
+
 
 
 
@@ -36,36 +34,35 @@ class 	EffortPublisher(Node): # The Publisher class is created, which inherits f
         self.Effort_publisher = self.create_publisher(Float64MultiArray,"/effort_controllers/commands", 10)
         self.subscription = self.create_subscription(JointState, 'joint_states', self.PID_callback, 10)
         self.params       = self.create_subscription(String, 'snake_robot_params', self.paramters_from_ui, 10)
-        #self.default_kp = 0.01 seems to be working without friction applied in ros2 control
-        #self.default_kd = 0.01 seems to be working without friction applied in ros2 control
-        #self.default_kp = 0.0001 working values
-        #self.default_kd = 0.0001
-        #self.default_a = 70 seems to be working without friction applied in ros2 control
-        #self.default_a = 67.5 working values with ros2_control gazebo friction mu1 0.1 and mu2=1
-        #self.default_w = 0.61  working values 
-        #self.default_w = 0.55 seems to be working without friction applied in ros2 control
+        self.dir_path       = os.path.expanduser('~/dev_ws/snake_robo/scripts/logs/')
+        
         self.subscription
         self.timer_timer = 0 
-        self.default_kp = 0.7
-        self.default_kd = 0.01 
-        self.default_a = 70
+        #self.default_kp = 0.7
+        self.default_kd = 0.08
+        self.default_kp = 0.9
+        #self.default_kd = 0.01 
+        self.default_a = 60
         self.default_w = 0.45
-        self.default_d = 0.698132
+        self.default_d = 0.79
         self.default_phi0 = 0
         self.default_phi1 = 0
-        self.k_d = self.default_kp
-        self.k_p = self.default_kd 
+        self.k_d = self.default_kd
+        self.k_p = self.default_kp 
         self.var_a = self.default_a
         self.var_w = self.default_w
         self.var_d = self.default_d
         self.var_phi0 = self.default_phi0
         self.var_phi1 = self.default_phi1
+        self.write_title = True
+
+        self.filename = self.dir_path + 'poseinformation' + datetime.now().strftime("%d_%m_%Y_%H_%M_%S")
 
     def paramters_from_ui(self, params):
         param_string = params.data.split(',')
         self.get_logger().debug(f'variable {param_string[0]} value {param_string[1]}')
-        self.k_p = float(param_string[1]) if param_string[0] == 'k_p' else self.k_p # Update K_p
-        self.k_d = float(param_string[1]) if param_string[0] == 'k_d' else self.k_d  # Update K_d
+        self.k_d = float(param_string[1]) if param_string[0] == 'k_d' else self.k_d # Update K_d
+        self.k_p = float(param_string[1]) if param_string[0] == 'k_p' else self.k_p  # Update K_p
         self.var_a = float(param_string[1]) if param_string[0] == 'a' else self.var_a # Update a
         self.var_w = float(param_string[1]) if param_string[0] == 'w' else self.var_w # Update w
         self.var_d = float(param_string[1]) if param_string[0] == 'd' else self.var_d # Update d
@@ -74,19 +71,15 @@ class 	EffortPublisher(Node): # The Publisher class is created, which inherits f
 
 
 
-    def PID_callback(self, msg): #j_angle_ta is the refrence value we want the joint to follow, the msg data is the feedback coming from the joint_states topic
+    def PID_callback(self, msg): 
        
 
-        #local_timer += 1 
-
-        #if local_timer == timer_timer:
-        #j_angle_ta = phi_angle_generator_at_t(local_timer) 
 
         feedback_temp = np.empty(9,dtype=float)
         velocity_temp = np.empty(9,dtype=float)   
         for i in range(0,9):
             
-            #msg.position[i] ---- msg.velocity[i] ----  msg.effort[i]
+ 
             
                 feedback_temp[i] = msg.effort[i] # u_bar is the  PID control value       
                 velocity_temp[i] = msg.velocity[i]
@@ -94,15 +87,10 @@ class 	EffortPublisher(Node): # The Publisher class is created, which inherits f
                 FeedBack[i] = feedback_temp[i]
                 Vel_FeedBack[i] = velocity_temp[i]
 
-        #print(u_temp)  
-        # timer_timer = timer_timer + 1
-
-        # if timer_timer >60: 
-        #    timer_timer = 0
-
+   
 
     def phi_angle_generator_at_t(self, timer):
-        #  global j_angle_ta
+
         
         N = 10
         a = self.var_a                            # Alpha value of the equation
@@ -118,28 +106,14 @@ class 	EffortPublisher(Node): # The Publisher class is created, which inherits f
         for i in range(0,N - 1):
             
             
-
-            
-                # phi0 = np.deg2rad(0)
-                #  temp_JA[i] = ( a * np.sin(w * timer + i * d) + phi0)
-                # temp_JA_d[i] = ( a * w * np.cos(w * timer + i * d))
-                # temp_JA_dd[i] = ( -1 * a * w ** 2 * np.sin(w * timer + i * d))
-
-            #elif 50 <= timer <= 70:
-                #   phi0 = np.deg2rad(0)
-                #  temp_JA[i] = ( a * np.sin(w * timer + i * d) + phi0)
-                #   temp_JA_d[i] = ( a * w * np.cos(w * timer + i * d))
-                #  temp_JA_dd[i] = ( -1 * a * w ** 2 * np.sin(w * timer + i * d))
-            # else:
-                
                 temp_JA[i] = ( a * np.sin(w * timer + i * d) + phi0 - phi1)
                 temp_JA_d[i] = ( a * w * np.cos(w * timer + i * d))
                 temp_JA_dd[i] = ( -1 * a * w ** 2 * np.sin(w * timer + i * d))
                 
-                #print (temp_JA)
+
                 
         temp_huge_arr= np.array([ temp_JA, temp_JA_d, temp_JA_dd])   
-            #j_angle_ta[i] = temp_JA[i]
+
 
 
         return temp_huge_arr
@@ -155,13 +129,16 @@ class 	EffortPublisher(Node): # The Publisher class is created, which inherits f
         set_point, Velocity , Acceleration  = self.phi_angle_generator_at_t(self.timer_timer)
         
         for i in range(0,9):
-           U_Value[i] = 1*((Acceleration[i] +    self.k_d * ( set_point[i] - FeedBack[i] ) + self.k_p * (Velocity[i] - Vel_FeedBack[i])))
+            U_Value[i] = 1*((Acceleration[i] + self.k_d * ( set_point[i] - FeedBack[i] ) + self.k_p * (Velocity[i] - Vel_FeedBack[i])))
+            with open(self.filename + '_j_' + str(i) + '.txt', 'a') as file:
+                if self.write_title:
+                    file.write(f'Time,Acceleration,PositionSetpoint,PositionSetpointError,VelocitySetpoint,VelocitySetpointError\n')
+                    self.write_title = False
+                file.write(f'{self.timer_timer},{Acceleration[i]},{set_point[i]},{set_point[i] - FeedBack[i]},{Velocity[i]},{Velocity[i] - Vel_FeedBack[i]}\n')
         # creating an array of values to be sent to the joints
         
-        
-        
         value1 = U_Value[0] 
-                                                 #[1.5708,0.0,0.0,0.0,-1.5708,0.0,0.0,0.0,1.5708]
+                                              
         value2 = U_Value[1] 
        
         value3 = U_Value[2] 
@@ -190,6 +167,7 @@ class 	EffortPublisher(Node): # The Publisher class is created, which inherits f
         	self.timer_timer = 0
         	
       	
+
         
         
 

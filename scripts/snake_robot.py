@@ -20,36 +20,36 @@ class SliderWindow(QWidget):
         super().__init__()
 
         # Create 7 sliders
-        self.scale_factor = 100
+        self.scale_factor = 10000
         #self.scale_factor = 1000
         self.k_p = QSlider()
         self.k_p.setOrientation(Qt.Vertical)
         self.k_p.setMinimum(1) # Actual value is equal to this divided by self.scale_factor
-        self.k_p.setMaximum(10000) # Actual value is equal to this divided by self.scale_factor
+        self.k_p.setMaximum(100000) # Actual value is equal to this divided by self.scale_factor
         self.k_d = QSlider()
         self.k_d.setOrientation(Qt.Vertical)
         self.k_d.setMinimum(1)  # Actual value is equal to this divided by self.scale_factor
-        self.k_d.setMaximum(10000) # Actual value is equal to this divided by self.scale_factor
+        self.k_d.setMaximum(100000) # Actual value is equal to this divided by self.scale_factor
         self.var_a = QSlider()
         self.var_a.setOrientation(Qt.Vertical)
         self.var_a.setMinimum(1) # Actual value is equal to this divided by self.scale_factor
-        self.var_a.setMaximum(10000) # Actual value is equal to this divided by self.scale_factor
+        self.var_a.setMaximum(1500000) # Actual value is equal to this divided by self.scale_factor
         self.var_w = QSlider()
         self.var_w.setOrientation(Qt.Vertical)
         self.var_w.setMinimum(1) # Actual value is equal to this divided by self.scale_factor
-        self.var_w.setMaximum(10000) # Actual value is equal to this divided by self.scale_factor
+        self.var_w.setMaximum(100000) # Actual value is equal to this divided by self.scale_factor
         self.var_d = QSlider()
         self.var_d.setOrientation(Qt.Vertical)
         self.var_d.setMinimum(1) # Actual value is equal to this divided by self.scale_factor
-        self.var_d.setMaximum(10000) # Actual value is equal to this divided by self.scale_factor        
+        self.var_d.setMaximum(62800) # Actual value is equal to this divided by self.scale_factor        
         self.var_phi0 = QSlider()
         self.var_phi0.setOrientation(Qt.Vertical)
         self.var_phi0.setMinimum(1) # Actual value is equal to this divided by self.scale_factor
-        self.var_phi0.setMaximum(10000) # Actual value is equal to this divided by self.scale_factor
+        self.var_phi0.setMaximum(1000000) # Actual value is equal to this divided by self.scale_factor
         self.var_phi1 = QSlider()
         self.var_phi1.setOrientation(Qt.Vertical)
         self.var_phi1.setMinimum(1) # Actual value is equal to this divided by self.scale_factor
-        self.var_phi1.setMaximum(10000) # Actual value is equal to this divided by self.scale_factor
+        self.var_phi1.setMaximum(1000000) # Actual value is equal to this divided by self.scale_factor
         
         # Create 7 labels for the sliders
         label1 = QLabel('k_p')

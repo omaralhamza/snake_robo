@@ -38,12 +38,7 @@ def generate_launch_description():
                                      
     
     
-    
-    map_l = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory(package_name),'launch','map.launch.py'
-                )]))
-    
+
     
     DeclareLaunchArgument(
             'world',
@@ -71,17 +66,6 @@ def generate_launch_description():
                                    '-entity', 'snake_robot'],
                         output='screen')
     
-    gui =  IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory(package_name),'launch','snake_robot.py'
-                )]), launch_arguments={'use_sim_time': 'true'}.items()
-       ) 
-    
-    simulation_bridge =  IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory(package_name),'launch','ui_simulation_bridge.py'
-                )]), launch_arguments={'use_sim_time': 'true'}.items()
-       ) 
     
     
     rviz_node = Node(
@@ -113,7 +97,6 @@ def generate_launch_description():
     return LaunchDescription([
         rviz_arg,    
         rsp,
-        map_l,
         gazebo,
         spawn_entity,
         rviz_node,
