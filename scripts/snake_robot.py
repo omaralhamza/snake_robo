@@ -25,11 +25,11 @@ class SliderWindow(QWidget):
         self.k_p = QSlider()
         self.k_p.setOrientation(Qt.Vertical)
         self.k_p.setMinimum(1) # Actual value is equal to this divided by self.scale_factor
-        self.k_p.setMaximum(100000) # Actual value is equal to this divided by self.scale_factor
+        self.k_p.setMaximum(30000) # Actual value is equal to this divided by self.scale_factor
         self.k_d = QSlider()
         self.k_d.setOrientation(Qt.Vertical)
         self.k_d.setMinimum(1)  # Actual value is equal to this divided by self.scale_factor
-        self.k_d.setMaximum(100000) # Actual value is equal to this divided by self.scale_factor
+        self.k_d.setMaximum(30000) # Actual value is equal to this divided by self.scale_factor
         self.var_a = QSlider()
         self.var_a.setOrientation(Qt.Vertical)
         self.var_a.setMinimum(1) # Actual value is equal to this divided by self.scale_factor
