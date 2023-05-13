@@ -3,7 +3,7 @@
 <package format="3">
   <name>my_bot</name>
   <version>0.0.0</version>
-  <description>Snake robot simulation and control using ROS2 and Gazebo</description>
+  <description>Snake robot simulation </description>
   <maintainer email="my_email@email.com">Omar Alhamza</maintainer>
   <license>TODO: License declaration</license>
   
