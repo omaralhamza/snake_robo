@@ -15,11 +15,9 @@ from launch_ros.parameter_descriptions import ParameterValue
 
 def generate_launch_description():
      
-     
-    # Include the robot_state_publisher launch file, provided by our own package. Force sim time to be enabled
-    # !!! MAKE SURE YOU SET THE PACKAGE NAME CORRECTLY !!!
+
     
-    package_name='my_bot' #<--- CHANGE ME
+    package_name='my_bot' 
     
     
     world_relative_path = 'worlds'
@@ -30,7 +28,7 @@ def generate_launch_description():
     
     default_rviz_config_path = os.path.join(pkg_share, 'rviz/snake.rviz')   
         
-     #urdf_tutorial_path = get_package_share_path('my_bot')
+
     
     
     rviz_arg = DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz_config_path,
@@ -54,13 +52,13 @@ def generate_launch_description():
        ) 
        
      
-    # Include the Gazebo launch file, provided by the gazebo_ros package
+
     gazebo = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
                     get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')]),
              )
 
-    # Run the spawner node from the gazebo_ros package. The entity name doesn't really matter if you only have a single robot.
+
     spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
                         arguments=['-topic', 'robot_description',
                                    '-entity', 'snake_robot'],
@@ -103,6 +101,6 @@ def generate_launch_description():
         joint_broad_spawner,
         effort_spawner
        
-        #load_trajectory_controller,
+
         
               ])

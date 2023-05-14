@@ -1,27 +1,26 @@
 #!/usr/bin/env python3
-import rclpy # One if the Dependencies that needs to also be added to the package.xml file
-from rclpy.node import Node
+import rclpy 
 from builtin_interfaces.msg import Duration
-from std_msgs.msg import Float64MultiArray, String, Float64 # One if the Dependencies that needs to also be added to the package.xml file
+from std_msgs.msg import Float64MultiArray, String, Float64 
 from sensor_msgs.msg import JointState
 import math, os, sys
 import numpy as np
 from datetime import datetime
 
-FeedBack = np.empty(9,dtype=float)   #Global variable that contains the effort value of the feedback from the /Joint_states topic
+FeedBack = np.empty(9,dtype=float)   
 Vel_FeedBack = np.empty(9,dtype=float)
-set_point = np.empty(9,dtype=float)  #Global variable that contains the setpoint I want the robot to follow, this will be equaled with
+set_point = np.empty(9,dtype=float) 
 U_Value = np.empty(9,dtype=float)
 Velocity = np.empty(9,dtype=float)
 Acceleration = np.empty(9,dtype=float)
 
-class 	EffortPublisher(Node): # The Publisher class is created, which inherits from (or is a subclass of) Node
-    def __init__(self):                                       # Following is the definition of the class’s constructor 
-        super().__init__('effort_Pub')                        # super().__init__ calls the Node class’s constructor and gives it your node name, in this case effort_Pub
-                                                              # The super() function is used to give access to methods and properties of a parent or sibling class
+class 	EffortPublisher(Node): 
+    def __init__(self):                                      
+        super().__init__('effort_Pub')                       
+                                                              
         self.get_logger().set_level(rclpy.logging.LoggingSeverity.DEBUG)
         timer_period = 0.1
-        self.shutdownnodeafter = 100 # in seconds
+        self.shutdownnodeafter = 200 # in seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.shutdownnode = self.create_timer(self.shutdownnodeafter, self.shutdown_callback)
         self.Effort_publisher = self.create_publisher(Float64MultiArray,"/effort_controllers/commands", 10)
@@ -31,8 +30,8 @@ class 	EffortPublisher(Node): # The Publisher class is created, which inherits f
         self.error_data = Float64()
         self.subscription
         self.timer_timer = 0 
-        self.default_kd = 0.62 #0.85
-        self.default_kp = 0.75 #0.25
+        self.default_kd = 0.8 
+        self.default_kp = 1#0.42 
         self.default_a = 65
         self.default_w = 0.45
         self.default_d = 0.78
@@ -71,11 +70,11 @@ class 	EffortPublisher(Node): # The Publisher class is created, which inherits f
 
     def phi_angle_generator_at_t(self, timer):
         N = 10
-        a = self.var_a                            # Alpha value of the equation
-        w = self.var_w                   # Freq_w of the equation of the angle
-        d = self.var_d                       # Delta, which is the value of the phase shift in the equation of the angle 0.698132 
-        phi0 = self.var_phi0                 # Offset angle in positive dir
-        phi1 = self.var_phi1                 # Offset angle in negative dir
+        a = self.var_a                          
+        w = self.var_w                   
+        d = self.var_d                      
+        phi0 = self.var_phi0                
+        phi1 = self.var_phi1                
         temp_JA = np.empty(9,dtype=float)
         temp_JA_d = np.empty(9,dtype=float)
         temp_JA_dd = np.empty(9,dtype=float)
@@ -92,14 +91,14 @@ class 	EffortPublisher(Node): # The Publisher class is created, which inherits f
         set_point, Velocity , Acceleration  = self.phi_angle_generator_at_t(self.timer_timer)
         for i in range(0,9):
             U_Value[i] = 1*((Acceleration[i] + self.k_d * ( set_point[i] - FeedBack[i] ) + self.k_p * (Velocity[i] - Vel_FeedBack[i])))
-            self.error_data.data = (set_point[i])#*(3.14/180) 
+            self.error_data.data = (set_point[i]) 
             self.create_publisher(Float64, 'position'+str(i), 10).publish(self.error_data)
 
             self.error_data.data =(FeedBack[i])*(180/3.14)
             self.create_publisher(Float64, 'position_feedback_'+str(i), 10).publish(self.error_data)
 
-            self.error_data.data = set_point[i] - FeedBack[i]
-            self.create_publisher(Float64, 'position_error_'+str(i), 10).publish(self.error_data)
+            #self.error_data.data = (set_point[i] - FeedBack[i]*(180/3.14))
+            #self.create_publisher(Float64, 'position_error_'+str(i), 10).publish(self.error_data)
 
 
 
@@ -117,7 +116,7 @@ class 	EffortPublisher(Node): # The Publisher class is created, which inherits f
                     file.write(f'Time,Acceleration,PositionSetpoint,PositionSetpointError,VelocitySetpoint,VelocitySetpointError\n')
                     self.write_title = False
                 file.write(f'{self.timer_timer},{Acceleration[i]},{set_point[i]},{set_point[i] - FeedBack[i]},{Velocity[i]},{Velocity[i] - Vel_FeedBack[i]}\n')
-        # creating an array of values to be sent to the joints
+     
         
         value1 = U_Value[0] 
         value2 = U_Value[1] 

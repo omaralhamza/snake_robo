@@ -1,13 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="snake_robot" >
 
-    <!-- This file is not a robot in and of itself, it just contains some useful tags that could be included in any robot -->
 
-
-
-
-    <!-- Specify some standard inertial calculations https://en.wikipedia.org/wiki/List_of_moments_of_inertia -->
-    <!-- These make use of xacro's mathematical functionality -->
 
     <xacro:macro name="inertial_sphere" params="mass radius *origin">
         <inertial>

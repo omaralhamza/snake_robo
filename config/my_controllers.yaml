@@ -10,7 +10,7 @@ controller_manager:
       type: effort_controllers/JointGroupEffortController
       
   
-  # Position Controllers ---------------------------------------
+
 joint_state_broadcaster:
    ros__parameters:
     joints:
