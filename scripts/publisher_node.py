@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import rclpy 
+from rclpy.node import Node
 from builtin_interfaces.msg import Duration
 from std_msgs.msg import Float64MultiArray, String, Float64 
 from sensor_msgs.msg import JointState
@@ -7,17 +8,17 @@ import math, os, sys
 import numpy as np
 from datetime import datetime
 
-FeedBack = np.empty(9,dtype=float)   
+FeedBack = np.empty(9,dtype=float)  
 Vel_FeedBack = np.empty(9,dtype=float)
-set_point = np.empty(9,dtype=float) 
+set_point = np.empty(9,dtype=float)  
 U_Value = np.empty(9,dtype=float)
 Velocity = np.empty(9,dtype=float)
 Acceleration = np.empty(9,dtype=float)
 
 class 	EffortPublisher(Node): 
-    def __init__(self):                                      
+    def __init__(self):                                     
         super().__init__('effort_Pub')                       
-                                                              
+                                                            
         self.get_logger().set_level(rclpy.logging.LoggingSeverity.DEBUG)
         timer_period = 0.1
         self.shutdownnodeafter = 200 # in seconds
@@ -30,7 +31,7 @@ class 	EffortPublisher(Node):
         self.error_data = Float64()
         self.subscription
         self.timer_timer = 0 
-        self.default_kd = 0.8 
+        self.default_kd = 0.8
         self.default_kp = 1#0.42 
         self.default_a = 65
         self.default_w = 0.45
@@ -70,11 +71,11 @@ class 	EffortPublisher(Node):
 
     def phi_angle_generator_at_t(self, timer):
         N = 10
-        a = self.var_a                          
-        w = self.var_w                   
-        d = self.var_d                      
-        phi0 = self.var_phi0                
-        phi1 = self.var_phi1                
+        a = self.var_a                            # Alpha value of the equation
+        w = self.var_w                   # Freq_w of the equation of the angle
+        d = self.var_d                       # Delta, which is the value of the phase shift in the equation of the angle 0.698132 
+        phi0 = self.var_phi0                 # Offset angle in positive dir
+        phi1 = self.var_phi1                 # Offset angle in negative dir
         temp_JA = np.empty(9,dtype=float)
         temp_JA_d = np.empty(9,dtype=float)
         temp_JA_dd = np.empty(9,dtype=float)
@@ -91,7 +92,7 @@ class 	EffortPublisher(Node):
         set_point, Velocity , Acceleration  = self.phi_angle_generator_at_t(self.timer_timer)
         for i in range(0,9):
             U_Value[i] = 1*((Acceleration[i] + self.k_d * ( set_point[i] - FeedBack[i] ) + self.k_p * (Velocity[i] - Vel_FeedBack[i])))
-            self.error_data.data = (set_point[i]) 
+            self.error_data.data = (set_point[i])#*(3.14/180) 
             self.create_publisher(Float64, 'position'+str(i), 10).publish(self.error_data)
 
             self.error_data.data =(FeedBack[i])*(180/3.14)
@@ -116,7 +117,7 @@ class 	EffortPublisher(Node):
                     file.write(f'Time,Acceleration,PositionSetpoint,PositionSetpointError,VelocitySetpoint,VelocitySetpointError\n')
                     self.write_title = False
                 file.write(f'{self.timer_timer},{Acceleration[i]},{set_point[i]},{set_point[i] - FeedBack[i]},{Velocity[i]},{Velocity[i] - Vel_FeedBack[i]}\n')
-     
+        # creating an array of values to be sent to the joints
         
         value1 = U_Value[0] 
         value2 = U_Value[1] 
